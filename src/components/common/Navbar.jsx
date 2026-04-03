@@ -5,7 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from 'react-redux';
-import UserProfileDropdown from '../navbar/userProfileDropdown';
+import UserProfileDropdown from '../navbar/UserProfileDropdown';
 
 const Navbar = () => {
     const { userData } = useSelector((state) => state.user);
