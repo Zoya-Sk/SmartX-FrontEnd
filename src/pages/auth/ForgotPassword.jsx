@@ -40,7 +40,7 @@ const ForgotPassword = () => {
                 throw new Error("Error occurred while sending OTP for reset password");
             }
             toast.dismiss(toastId);
-            navigate("/reset-pass-otp-verify",{state:{email}});
+            navigate("/reset-pass-otp-verify", { state: { email } });
             toast.success(response?.data?.message || "OTP sent! Check your inbox.");
             setLoading(false);
 
@@ -51,18 +51,18 @@ const ForgotPassword = () => {
         }
     }
     return (
-        <div className='flex flex-row px-24 py-6'>
-            {/* FORGET PASSWORD FORM  */}
-            <div className='w-[50%]'>
-                <Typography variant="h3" sx={{ fontWeight: 600 }}>
+        <div className='flex flex-col md:flex-row px-6 md:px-24 py-6'>
+
+            {/* FORGOT PASSWORD FORM */}
+            <div className='w-full md:w-[50%]'>
+                <Typography variant="h4" sx={{ fontWeight: 600 }}>
                     Forgot Password
                 </Typography>
                 <p className="text-[14px] mt-2">
                     Enter your email address and we'll send you an OTP to reset your password.
                 </p>
 
-                {/* FORM  */}
-                <div className='bg-white rounded-md w-[80%] p-6 mt-24 formAnimation'>
+                <div className='bg-white rounded-md w-full md:w-[80%] p-6 mt-8 md:mt-24 formAnimation'>
                     <form className='flex flex-col gap-6 m-4 overflow-y-hidden' onSubmit={submitHandler}>
                         <TextField type="email"
                             variant='standard'
@@ -70,9 +70,7 @@ const ForgotPassword = () => {
                             label='Email'
                             placeholder='Enter your Email'
                             required
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                            }}
+                            onChange={(e) => setEmail(e.target.value)}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -82,7 +80,6 @@ const ForgotPassword = () => {
                             }} />
 
                         <div className='flex items-center'>
-
                             <Button
                                 variant="contained"
                                 size="small"
@@ -93,16 +90,14 @@ const ForgotPassword = () => {
                                 sx={{ backgroundColor: "black", textTransform: "none" }}>
                                 Submit
                             </Button>
-                            {
-                                loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
-                            }
+                            {loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>}
                         </div>
                     </form>
                 </div>
             </div>
 
-            {/* LOGO ANIMATION  */}
-            <div className='w-[50%] flex justify-center items-center'>
+            {/* LOGO ANIMATION - hidden on mobile */}
+            <div className='hidden md:flex w-[50%] justify-center items-center'>
                 <LogoAnimation />
             </div>
         </div>

@@ -57,7 +57,7 @@ const ChatbotModel = ({ setChatbot }) => {
 
     return (
         <div className='fixed inset-0 bg-black/75 flex items-center justify-center text-white z-[100]'>
-            <div className='bg-gray-800 h-[80vh] w-[60vw] rounded-2xl flex flex-col'>
+            <div className='bg-gray-800 h-[85vh] w-[95vw] sm:w-[75vw] md:w-[60vw] rounded-2xl flex flex-col'>
 
                 {/* top div */}
                 <div className='px-6 py-2 flex justify-between items-center h-[15%]'>

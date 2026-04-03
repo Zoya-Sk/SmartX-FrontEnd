@@ -61,9 +61,11 @@ const ResetPassOtpVerify = () => {
                 throw new Error("Error occurred while sending OTP for reset password")
             }
             toast.success(response?.data?.message || "OTP verified!", { id: toastId });
-            navigate("/reset-password",{state:{
-                email:userEmail
-            }});
+            navigate("/reset-password", {
+                state: {
+                    email: userEmail
+                }
+            });
             setLoading(false);
         } catch (error) {
             console.log(error);
@@ -74,18 +76,17 @@ const ResetPassOtpVerify = () => {
     }
 
     return (
-        <div className='flex flex-row w-[100%]'>
+        <div className='flex flex-col md:flex-row w-full'>
 
             {/* OTP */}
-            <div className='flex items-center justify-center h-[80vh] w-[50%] otpAnimation'>
-                <div className='flex items-center justify-center flex-col gap-1'>
-                    <h2 className='font-black text-[20px]'>We've sent a verification code to your email.</h2>
-                    <p className='text-sm'>Please enter it below to verify your account.</p>
-                    <p className='text-blue-600 text-xs'>
-                        {
-                            userEmail
-                        }
+            <div className='flex items-center justify-center min-h-[80vh] w-full md:w-[50%] px-6 otpAnimation'>
+                <div className='flex items-center justify-center flex-col gap-1 w-full max-w-sm'>
+                    <h2 className='font-black text-[18px] md:text-[20px] text-center'>We've sent a verification code to your email.</h2>
+                    <p className='text-sm text-center'>Please enter it below to verify your account.</p>
+                    <p className='text-blue-600 text-xs text-center'>
+                        {userEmail}
                     </p>
+
                     <div className='mt-6'>
                         <OtpInput
                             value={otp}
@@ -93,7 +94,7 @@ const ResetPassOtpVerify = () => {
                             numInputs={4}
                             renderSeparator={<span> - </span>}
                             renderInput={(props) => <input {...props}
-                                className='w-16 h-10 text-4xl text-center bg-gray-300 text-black border border-gray-400 rounded-md'
+                                className='w-12 h-10 sm:w-16 text-3xl sm:text-4xl text-center bg-gray-300 text-black border border-gray-400 rounded-md'
                             />}
                         />
                     </div>
@@ -106,21 +107,22 @@ const ResetPassOtpVerify = () => {
                             disabled={otpLoading}>
                             Verify OTP
                         </Button>
-                        {
-                            otpLoading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
-                        }
+                        {otpLoading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>}
                     </div>
-
 
                     <div>
-                        <p className='mt-3 text-sm'>Didn't get the code? <span className='cursor-pointer text-blue-600 hover:underline' onClick={resendOtpHandler}>Resend Code</span></p>
+                        <p className='mt-3 text-sm text-center'>
+                            Didn't get the code?{' '}
+                            <span className='cursor-pointer text-blue-600 hover:underline' onClick={resendOtpHandler}>
+                                Resend Code
+                            </span>
+                        </p>
                     </div>
-
                 </div>
             </div>
 
-            {/* LOGO ANIMATION  */}
-            <div className='w-[50%] flex items-center justify-center -ml-14'>
+            {/* LOGO ANIMATION - hidden on mobile */}
+            <div className='hidden md:flex w-[50%] items-center justify-center -ml-14'>
                 <LogoAnimation />
             </div>
 

@@ -17,7 +17,7 @@ const Otp = () => {
     const navigate = useNavigate();
 
     // validation
-     if (!formData) {
+    if (!formData) {
         navigate("/signup");
         return null;
     }
@@ -81,28 +81,27 @@ const Otp = () => {
         }
     }
 
-    useGSAP(()=>{
-        gsap.from(".otpAnimation",{
-            x:-300,
-            opacity:0,
-            delay:0.6,
-            duration:0.4,
+    useGSAP(() => {
+        gsap.from(".otpAnimation", {
+            x: -300,
+            opacity: 0,
+            delay: 0.6,
+            duration: 0.4,
         })
     })
 
     return (
-        <div className='flex flex-row'>
+        <div className='flex flex-col md:flex-row'>
 
             {/* OTP */}
-            <div className='flex items-center justify-center h-[80vh] w-[50%] otpAnimation'>
-                <div className='flex items-center justify-center flex-col gap-1'>
-                    <h2 className='font-black text-[20px]'>We've sent a verification code to your email.</h2>
-                    <p className='text-sm'>Please enter it below to verify your account.</p>
-                    <p className='text-blue-600 text-xs'>
-                        {
-                            formData?.email
-                        }
+            <div className='flex items-center justify-center min-h-[80vh] w-full md:w-[50%] px-6 otpAnimation'>
+                <div className='flex items-center justify-center flex-col gap-1 w-full max-w-sm'>
+                    <h2 className='font-black text-[18px] md:text-[20px] text-center'>We've sent a verification code to your email.</h2>
+                    <p className='text-sm text-center'>Please enter it below to verify your account.</p>
+                    <p className='text-blue-600 text-xs text-center'>
+                        {formData?.email}
                     </p>
+
                     <div className='mt-6'>
                         <OtpInput
                             value={otp}
@@ -110,7 +109,7 @@ const Otp = () => {
                             numInputs={4}
                             renderSeparator={<span> - </span>}
                             renderInput={(props) => <input {...props}
-                                className='w-16 h-10 text-4xl text-center bg-gray-300 text-black border border-gray-400 rounded-md'
+                                className='w-12 h-10 sm:w-16 text-3xl sm:text-4xl text-center bg-gray-300 text-black border border-gray-400 rounded-md'
                             />}
                         />
                     </div>
@@ -119,21 +118,20 @@ const Otp = () => {
                         <Button variant="contained" size="large" fullWidth onClick={verifyOtpHandler} disabled={loading}>
                             Verify OTP
                         </Button>
-                        {
-                            loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
-                        }
+                        {loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>}
                     </div>
-
 
                     <div>
-                        <p className='mt-3 text-sm'>Didn't get the code? <span className='underline cursor-pointer' onClick={resendOtpHandler}>Resend Code</span></p>
+                        <p className='mt-3 text-sm text-center'>
+                            Didn't get the code?{' '}
+                            <span className='underline cursor-pointer' onClick={resendOtpHandler}>Resend Code</span>
+                        </p>
                     </div>
-
                 </div>
             </div>
 
-            {/* LOGO ANIMATION  */}
-            <div className='w-[50%] flex items-center justify-center -ml-14'>
+            {/* LOGO ANIMATION - hidden on mobile */}
+            <div className='hidden md:flex w-[50%] items-center justify-center -ml-14'>
                 <LogoAnimation />
             </div>
 

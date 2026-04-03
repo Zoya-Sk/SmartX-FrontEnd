@@ -2,7 +2,7 @@ import React from 'react';
 
 const SkeletonLoading = () => {
   return (
-    <div className="w-[295px] bg-gray-800 border border-gray-700 px-2 py-2 rounded-md flex flex-col gap-3 cursor-pointer animate-pulse">
+    <div className="w-full bg-gray-800 border border-gray-700 px-2 py-2 rounded-md flex flex-col gap-3 cursor-pointer animate-pulse">
       {/* Image placeholder with heart icon area */}
       <div className="w-full h-[150px] relative">
         <div className="w-full h-full bg-gray-700 rounded-md" />

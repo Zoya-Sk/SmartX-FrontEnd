@@ -94,20 +94,21 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className='flex px-6 py-6 w-screen h-[80vh] mt-6'>
-            <div className='w-[50%]'>
+        <div className='flex flex-col md:flex-row px-6 py-6 w-full min-h-[80vh] mt-6'>
+
+            {/* FORM */}
+            <div className='w-full md:w-[50%]'>
                 <div>
-                    <Typography variant="h3" sx={{ fontWeight: 600 }}>
-                        Rest Password
+                    <Typography variant="h4" sx={{ fontWeight: 600 }}>
+                        Reset Password
                     </Typography>
                     <p className="text-[14px] mt-2">
                         Enter a New Password
                     </p>
                 </div>
 
-                {/* reset password form  */}
-                <div className="bg-white rounded-md w-[80%] p-6 mt-20 overflow-y-hidden resetFormAnimation">
-                    <form className="flex flex-col gap-4 rounded-md w-[80%] ml-8" onSubmit={submitHandler}>
+                <div className="bg-white rounded-md w-full md:w-[80%] p-6 mt-8 md:mt-20 overflow-y-hidden resetFormAnimation">
+                    <form className="flex flex-col gap-4 rounded-md w-full md:w-[80%] md:ml-8" onSubmit={submitHandler}>
                         <TextField
                             type={newPassword ? "text" : "password"}
                             variant="standard"
@@ -123,18 +124,10 @@ const ResetPassword = () => {
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        {
-                                            newPassword ? <IoEyeSharp size={20} className="cursor-pointer"
-                                                onClick={() => {
-                                                    setNewPassword(false);
-                                                }}
-                                            /> : <FaEyeSlash size={20} className="cursor-pointer"
-                                                onClick={() => {
-                                                    setNewPassword(true);
-                                                }}
-                                            />
+                                        {newPassword
+                                            ? <IoEyeSharp size={20} className="cursor-pointer" onClick={() => setNewPassword(false)} />
+                                            : <FaEyeSlash size={20} className="cursor-pointer" onClick={() => setNewPassword(true)} />
                                         }
-
                                     </InputAdornment>
                                 )
                             }}
@@ -154,16 +147,9 @@ const ResetPassword = () => {
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        {
-                                            confirmNewPassword ? <IoEyeSharp size={20} className="cursor-pointer"
-                                                onClick={() => {
-                                                    setConfirmNewPassword(false);
-                                                }}
-                                            /> : <FaEyeSlash size={20} className="cursor-pointer"
-                                                onClick={() => {
-                                                    setConfirmNewPassword(true);
-                                                }}
-                                            />
+                                        {confirmNewPassword
+                                            ? <IoEyeSharp size={20} className="cursor-pointer" onClick={() => setConfirmNewPassword(false)} />
+                                            : <FaEyeSlash size={20} className="cursor-pointer" onClick={() => setConfirmNewPassword(true)} />
                                         }
                                     </InputAdornment>
                                 )
@@ -180,18 +166,15 @@ const ResetPassword = () => {
                                 sx={{ backgroundColor: "black", textTransform: "none" }}
                                 type="submit">
                                 Reset Password
-
                             </Button>
-                            {
-                                loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>
-                            }
+                            {loading && <i className="fa-solid fa-spinner animate-spin -ml-8"></i>}
                         </div>
                     </form>
                 </div>
             </div>
 
-            {/* LOGO ANIMATION  */}
-            <div className='w-[50%] flex items-center justify-center h-full'>
+            {/* LOGO ANIMATION - hidden on mobile */}
+            <div className='hidden md:flex w-[50%] items-center justify-center h-full'>
                 <LogoAnimation />
             </div>
         </div>
