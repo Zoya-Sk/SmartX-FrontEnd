@@ -19,6 +19,8 @@ import copy from 'copy-to-clipboard';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
+    const [priceCheck, setPriceCheck] = useState(null);
+    const [priceLoading, setPriceLoading] = useState(false);
     const { allProducts } = useSelector((state) => state.wishlist);
     const addProductToWishlistHandler = () => {
         if (!token) {
@@ -78,6 +80,24 @@ const ProductDetails = () => {
         navigate("/user-conversation", { state: productDetails?.seller })
     }
 
+    const handleFairPriceCheck = async () => {
+        setPriceLoading(true);
+        setPriceCheck(null);
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/fair-price`, {
+                title: productDetails?.productName,
+                category: productDetails?.category?.categoryName,
+                price: productDetails?.price,
+                condition: productDetails?.condition,
+            });
+            setPriceCheck(res?.data?.response);
+        } catch (err) {
+            setPriceCheck({ verdict: "Error", emoji: "⚠️", reason: "Could not analyze price." });
+        } finally {
+            setPriceLoading(false);
+        }
+    };
+
     useEffect(() => {
         getProductDetails();
     }, [productId]);
@@ -123,10 +143,22 @@ const ProductDetails = () => {
                                 </div>
 
                                 {/* AI Price Suggestion */}
-                                <button className='flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 transition w-fit'>
-                                    <SiGooglegemini size={20} className='text-white' />
-                                    Is this a fair price?
-                                </button>
+                                <div className='flex flex-col gap-2'>
+                                    <button
+                                        onClick={handleFairPriceCheck}
+                                        disabled={priceLoading}
+                                        className='flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 transition w-fit disabled:opacity-50'>
+                                        <SiGooglegemini size={20} className={`text-white ${priceLoading ? 'animate-spin' : ''}`} />
+                                        {priceLoading ? "Analyzing..." : "Is this a fair price?"}
+                                    </button>
+
+                                    {priceCheck && (
+                                        <div className='bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm'>
+                                            <p className='text-white font-semibold'>{priceCheck.emoji} {priceCheck.verdict}</p>
+                                            <p className='text-gray-400 text-xs mt-1'>{priceCheck.reason}</p>
+                                        </div>
+                                    )}
+                                </div>
 
                                 {/* Category */}
                                 <p className='text-gray-400 text-sm'>
