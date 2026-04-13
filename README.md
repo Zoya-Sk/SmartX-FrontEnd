@@ -4,16 +4,16 @@ SmartX is a modern, fully responsive, and AI-powered local marketplace web appli
 
 ✨ Key Features
 
-🏠 Dynamic Home Page - Category-based navigation (Cars, Bikes, Properties, Electronics, Mobiles, Jobs, Furniture, Fashion) with an image carousel and real-time product grid
-🔍 Live Search - Instant search suggestions appear as the user types, with a full Search Results page
-📦 Product Listings - Detailed product cards showing image, price (₹), description, location, and date posted
-📝 Post Your Ad (Sell) - A clean listing form with AI-powered auto-fill for product name and description using a sparkle icon
-🤖 Zara — AI Chatbot - An intelligent assistant (powered by the Grok API via the backend) accessible from any page via the robot icon, providing real-time platform guidance
-💰 AI Fair Price Checker - An "Is this a fair price?" button on every product detail page to help buyers make smarter decisions
-💬 In-App Messaging - Real-time chat between buyers and sellers directly within the platform — no personal contact details required
-❤️ Wishlist - Save and manage favourite product listings with a heart icon
-👤 User Profile & Dropdown Menu - Quick access to Chat, Settings, My Products, Help, and Log Out
-📱 Fully Responsive - Optimized for desktops, tablets, and mobile devices with a hamburger menu and adaptive grid layout
+- 🏠 Dynamic Home Page - Category-based navigation (Cars, Bikes, Properties, Electronics, Mobiles, Jobs, Furniture, Fashion) with an image carousel and real-time product grid
+- 🔍 Live Search - Instant search suggestions appear as the user types, with a full Search Results page
+- 📦 Product Listings - Detailed product cards showing image, price (₹), description, location, and date posted
+- 📝 Post Your Ad (Sell) - A clean listing form with AI-powered auto-fill for product name and description using a sparkle icon
+- 🤖 Zara — AI Chatbot - An intelligent assistant (powered by the Grok API via the backend) accessible from any page via the robot icon, providing real-time platform guidance
+- 💰 AI Fair Price Checker - An "Is this a fair price?" button on every product detail page to help buyers make smarter decisions
+- 💬 In-App Messaging - Real-time chat between buyers and sellers directly within the platform — no personal contact details required
+- ❤️ Wishlist - Save and manage favourite product listings with a heart icon
+- 👤 User Profile & Dropdown Menu - Quick access to Chat, Settings, My Products, Help, and Log Out
+- 📱 Fully Responsive - Optimized for desktops, tablets, and mobile devices with a hamburger menu and adaptive grid layout
 
 
 🛠️ Tech Stack
@@ -29,12 +29,14 @@ SmartX is a modern, fully responsive, and AI-powered local marketplace web appli
 
 🔗 Links
 
-🌐 Live Demo: https://smart-x-front-end.vercel.app
-🔧 Backend Repository: https://github.com/Zoya-Sk/SmartX-BackEnd
+- 🌐 Live Demo: https://smart-x-front-end.vercel.app
+- 🔧 Backend Repository: https://github.com/Zoya-Sk/SmartX-BackEnd
 
 
 🚀 Getting Started
-bash# Clone the repository
+
+```bash
+# Clone the repository
 git clone https://github.com/Zoya-Sk/SmartX-FrontEnd.git
 
 # Navigate to the project directory
