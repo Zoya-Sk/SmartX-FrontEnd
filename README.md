@@ -53,4 +53,3 @@ This is the frontend part of the SmartX project. The backend (Node.js + Express.
 
 
 Developed by Zoya Shaikh | BSc-IT, Semester VI | SNDT Women's University, Mumbai | 2025–2026
-Under the guidance of Prof. Miss. Sushma Shetye
