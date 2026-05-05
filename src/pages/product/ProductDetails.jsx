@@ -41,6 +41,7 @@ const ProductDetails = () => {
     const productId = params?.productId;
     const [loading, setLoading] = useState(false);
     const [productDetails, setProductDetails] = useState({});
+    const [paymentLoading, setPaymentLoading] = useState(false);
     const navigate = useNavigate();
     const { token } = useSelector((state) => state.auth);
     const isWishlisted = allProducts?.some((item) => item?._id === productDetails?._id);
@@ -95,6 +96,68 @@ const ProductDetails = () => {
             setPriceCheck({ verdict: "Error", emoji: "⚠️", reason: "Could not analyze price." });
         } finally {
             setPriceLoading(false);
+        }
+    };
+
+    const handleBuyNow = async () => {
+        if (!token) {
+            toast.error("Please login to buy this product");
+            return;
+        }
+        if (userData?._id === productDetails?.seller?._id) {
+            toast.error("You cannot buy your own product!");
+            return;
+        }
+        try {
+            setPaymentLoading(true);
+
+            // Step 1: Backend se order create karo
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}/payment/create-order`,
+                { productId: productDetails._id },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            // Step 2: Razorpay checkout open karo
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: data.amount,
+                currency: data.currency,
+                name: "SmartX",
+                description: productDetails?.productName,
+                order_id: data.orderId,
+                handler: async (response) => {
+                    // Step 3: Payment verify karo
+                    const verify = await axios.post(
+                        `${import.meta.env.VITE_BACKEND_URL}/payment/verify`,
+                        response,
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    );
+                    if (verify.data.success) {
+                        toast.success("Payment Successful! 🎉");
+                        navigate("/my-orders"); // baad mein ye page banayenge
+                    }
+                },
+                prefill: {
+                    name: `${userData?.firstName} ${userData?.lastName}`,
+                    email: userData?.email,
+                },
+                theme: { color: "#EAB308" }, // SmartX yellow
+                modal: {
+                    ondismiss: () => {
+                        toast.error("Payment cancelled!");
+                        setPaymentLoading(false);
+                    }
+                }
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+            setPaymentLoading(false);
+
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Payment failed!");
+            setPaymentLoading(false);
         }
     };
 
@@ -226,6 +289,14 @@ const ProductDetails = () => {
 
                             {/* Bottom Section — Actions */}
                             <div className='flex flex-col gap-3 mt-4'>
+                                {userData?._id !== productDetails?.seller?._id && (
+                                    <button
+                                        onClick={handleBuyNow}
+                                        disabled={paymentLoading}
+                                        className='w-full bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600 transition disabled:opacity-50'>
+                                        {paymentLoading ? "Processing..." : "Buy Now 🛍️"}
+                                    </button>
+                                )}
                                 <button className='w-full bg-yellow-400 text-black font-bold py-2 rounded-lg hover:bg-yellow-500 transition'
                                     onClick={chatWithSellerHandler}>
                                     Contact Seller

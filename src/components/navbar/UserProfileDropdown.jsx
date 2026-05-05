@@ -5,6 +5,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { IoChatboxEllipses } from "react-icons/io5";
+import { MdShoppingBag } from "react-icons/md";
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material'
 import { useDispatch } from 'react-redux';
 import { removeToken } from '../../redux/slices/auth';
@@ -39,6 +40,10 @@ const UserProfileDropdown = ({ setShowDropdown }) => {
       <Link to="/my-products" className='flex items-center gap-2 hover:bg-gray-300 rounded-lg px-2 py-1 transition-all duration-200' onClick={() => { setShowDropdown(false) }}>
         <FaBoxOpen size={25} />
         <p className='font-semibold text-[18px]'>My Products</p>
+      </Link>
+      <Link to="/my-orders" className='flex items-center gap-2 hover:bg-gray-300 rounded-lg px-2 py-1 transition-all duration-200' onClick={() => { setShowDropdown(false) }}>
+        <MdShoppingBag size={25} />
+        <p className='font-semibold text-[18px]'>My Orders</p>
       </Link>
       <Link to="/help" className='flex items-center gap-2 hover:bg-gray-300 rounded-lg px-2 py-1 transition-all duration-200' onClick={() => { setShowDropdown(false) }}><MdOutlineContactSupport size={25} /><p className='font-semibold text-[18px]'>Help</p></Link>
       <Button variant='contained' className='gap-2' sx={{ textTransform: 'none' }} onClick={showDailog}><MdLogout size={20} />Log Out</Button>

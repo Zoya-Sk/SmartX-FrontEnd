@@ -32,6 +32,7 @@ import { setAllOnlineUsers, setSocket } from './redux/slices/socket'
 import checkUserAuth from './CheckAuth'
 import Error from './components/common/Error'
 import checkGuestOnly from './checkGuestOnly'
+import MyOrders from './pages/product/MyOrders'
 
 const router = createBrowserRouter([
   // ✅ Public routes (no auth needed)
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
   { path: "/category/:categoryId", loader: checkUserAuth, element: <><Navbar /><CategoryDetails /><Footer /></> },
   { path: "/searchProducts", loader: checkUserAuth, element: <><Navbar /><SearchProducts /><Footer /></> },
   { path: "/my-products", loader: checkUserAuth, element: <><Navbar /><MyProducts /><Footer /></> },
+  { path: "/my-orders", loader: checkUserAuth, element: <><Navbar /><MyOrders /><Footer /></> },
   { path: "/product-upload", loader: checkUserAuth, element: <><Navbar /><ProductUpload /></> },
   { path: "/chat-users", loader: checkUserAuth, element: <><Navbar /><ChatUsers /></> },
   { path: "/user-conversation", loader: checkUserAuth, element: <><Navbar /><UserConversation /></> },
